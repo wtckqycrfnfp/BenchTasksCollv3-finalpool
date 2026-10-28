@@ -1,0 +1,120 @@
+name: Build finalpool
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-finalpool:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Build finalpool branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "wtckqycrfnfp"
+          git config user.email "ops@wtckqycrfnfp.local"
+          git fetch origin '+refs/heads/*:refs/remotes/origin/*'
+          git checkout --orphan finalpool-build origin/main
+          git rm -rf --quiet .
+          mkdir -p tasks/finalpool
+
+          ENTRIES=$(cat <<'EOF'
+          origin/fan-dev fan-dev coupon-manager
+          origin/fan-dev fan-dev discount-calculator
+          origin/fan-dev fan-dev loyalty-program
+          origin/fan-dev fan-dev price-tracker
+          origin/gyy gyy blog-engine
+          origin/gyy gyy cms-builder
+          origin/gyy gyy content-scheduler
+          origin/gyy gyy robots-handler
+          origin/gyy gyy social-publisher
+          origin/gyy gyy tag-manager
+          origin/haoze haoze media-organizer
+          origin/haoze haoze streaming-service
+          origin/haoze haoze subtitle-generator
+          origin/haoze haoze video-trimmer
+          origin/jl_dev jl_dev canvas-grade-automation
+          origin/jl_dev jl_dev customer-feedback-processor
+          origin/jl_dev jl_dev email-classification-system
+          origin/jl_dev jl_dev inventory-management
+          origin/jl_dev jl_dev pdf-report-generator
+          origin/junteng_dev junteng_dev booking-system
+          origin/junteng_dev junteng_dev calendar-sync
+          origin/junteng_dev junteng_dev contact-manager
+          origin/junteng_dev junteng_dev help-desk
+          origin/junteng_dev junteng_dev order-processor
+          origin/junteng_dev junteng_dev product-catalog
+          origin/junteng_dev junteng_dev reminder-service
+          origin/junteng_dev junteng_dev shipment-tracker
+          origin/junxian_dev junxian_dev qr-generator
+          origin/junxian_dev junxian_dev social-connector
+          origin/junxian_dev junxian_dev translation-api
+          origin/lueyang-dev lueyang-dev activity-logger
+          origin/lueyang-dev lueyang-dev client-portal
+          origin/lueyang-dev lueyang-dev crm-system
+          origin/lueyang-dev lueyang-dev deal-manager
+          origin/lueyang-dev lueyang-dev email-campaign
+          origin/lueyang-dev lueyang-dev follow-up-reminder
+          origin/lueyang-dev lueyang-dev sales-pipeline
+          origin/lueyang-dev lueyang-dev territory-manager
+          origin/lv lv analytics-dashboard
+          origin/lv lv chat-bot
+          origin/lv lv feedback-collector
+          origin/lv lv personalization-service
+          origin/lv lv sentiment-analyzer
+          origin/lv lv survey-builder
+          origin/lv lv voice-processor
+          origin/ruige ruige canvas-automation
+          origin/ruige ruige data-analytics
+          origin/ruige ruige expense-tracker
+          origin/ruige ruige file-manager
+          origin/ruige ruige log-analyzer
+          origin/ruige ruige web-crawler
+          origin/wenshuo-dev wenshuo-dev cache-optimizer
+          origin/wenshuo-dev wenshuo-dev image-processor
+          origin/wenshuo-dev wenshuo-dev scheduler
+          origin/wenshuo-dev wenshuo-dev search-engine
+          origin/xiaochen_dev xiaochen_dev backup-utility
+          origin/xiaochen_dev xiaochen_dev deployment-tool
+          origin/xiaochen_dev xiaochen_dev error-tracker
+          origin/xiaochen_dev xiaochen_dev health-monitor
+          origin/xiaochen_dev xiaochen_dev monitoring-agent
+          origin/xiaochen_dev xiaochen_dev security-scanner
+          origin/xiaochen_dev xiaochen_dev status-checker
+          origin/yuxuan-dev yuxuan-dev asset-optimizer
+          origin/yuxuan-dev yuxuan-dev content-manager
+          origin/yuxuan-dev yuxuan-dev network-analyzer
+          origin/yuxuan-dev yuxuan-dev sync-service
+          origin/yuxuan-dev yuxuan-dev task-scheduler
+          origin/yuzhen-dev yuzhen-dev alert-system
+          origin/yuzhen-dev yuzhen-dev data-validator
+          origin/yuzhen-dev yuzhen-dev form-builder
+          origin/yuzhen-dev yuzhen-dev invoice-generator
+          origin/yuzhen-dev yuzhen-dev payment-processor
+          origin/yuzhen-dev yuzhen-dev permission-manager
+          origin/zhaochen zhaochen certificate-manager
+          origin/zhaochen zhaochen load-balancer
+          origin/zhaochen zhaochen storage-manager
+          origin/zhaochen zhaochen template-engine
+          EOF
+          )
+
+          while read -r branch dev task; do
+            [ -z "${branch:-}" ] && continue
+            echo "Copying ${dev}/${task} from ${branch}"
+            git archive "${branch}" "tasks/${dev}/${task}" | tar -x --strip-components=2 -C tasks/finalpool
+          done <<< "$ENTRIES"
+
+          printf '%s\n' 'Final pool of implemented tasks from BenchTasksCollv3 (checked against tasks/examples requirements).' > tasks/finalpool/readme.txt
+          git add tasks
+          git commit -m "Add implemented tasks to finalpool"
+          git branch -M finalpool
+          git push --force origin finalpool
