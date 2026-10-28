@@ -27,10 +27,10 @@ jobs:
           mkdir -p tasks/finalpool
 
           ENTRIES=$(cat <<'EOF'
-          origin/fan fan coupon-manager
-          origin/fan fan discount-calculator
-          origin/fan fan loyalty-program
-          origin/fan fan price-tracker
+          origin/fan-dev fan coupon-manager
+          origin/fan-dev fan discount-calculator
+          origin/fan-dev fan loyalty-program
+          origin/fan-dev fan price-tracker
           origin/gyy gyy blog-engine
           origin/gyy gyy cms-builder
           origin/gyy gyy content-scheduler
