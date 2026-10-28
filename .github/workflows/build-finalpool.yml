@@ -27,10 +27,10 @@ jobs:
           mkdir -p tasks/finalpool
 
           ENTRIES=$(cat <<'EOF'
-          origin/fan-dev fan-dev coupon-manager
-          origin/fan-dev fan-dev discount-calculator
-          origin/fan-dev fan-dev loyalty-program
-          origin/fan-dev fan-dev price-tracker
+          origin/fan fan coupon-manager
+          origin/fan fan discount-calculator
+          origin/fan fan loyalty-program
+          origin/fan fan price-tracker
           origin/gyy gyy blog-engine
           origin/gyy gyy cms-builder
           origin/gyy gyy content-scheduler
@@ -41,30 +41,30 @@ jobs:
           origin/haoze haoze streaming-service
           origin/haoze haoze subtitle-generator
           origin/haoze haoze video-trimmer
-          origin/jl_dev jl_dev canvas-grade-automation
-          origin/jl_dev jl_dev customer-feedback-processor
-          origin/jl_dev jl_dev email-classification-system
-          origin/jl_dev jl_dev inventory-management
-          origin/jl_dev jl_dev pdf-report-generator
-          origin/junteng_dev junteng_dev booking-system
-          origin/junteng_dev junteng_dev calendar-sync
-          origin/junteng_dev junteng_dev contact-manager
-          origin/junteng_dev junteng_dev help-desk
-          origin/junteng_dev junteng_dev order-processor
-          origin/junteng_dev junteng_dev product-catalog
-          origin/junteng_dev junteng_dev reminder-service
-          origin/junteng_dev junteng_dev shipment-tracker
-          origin/junxian_dev junxian_dev qr-generator
-          origin/junxian_dev junxian_dev social-connector
-          origin/junxian_dev junxian_dev translation-api
-          origin/lueyang-dev lueyang-dev activity-logger
-          origin/lueyang-dev lueyang-dev client-portal
-          origin/lueyang-dev lueyang-dev crm-system
-          origin/lueyang-dev lueyang-dev deal-manager
-          origin/lueyang-dev lueyang-dev email-campaign
-          origin/lueyang-dev lueyang-dev follow-up-reminder
-          origin/lueyang-dev lueyang-dev sales-pipeline
-          origin/lueyang-dev lueyang-dev territory-manager
+          origin/jl_dev jl canvas-grade-automation
+          origin/jl_dev jl customer-feedback-processor
+          origin/jl_dev jl email-classification-system
+          origin/jl_dev jl inventory-management
+          origin/jl_dev jl pdf-report-generator
+          origin/junteng_dev junteng booking-system
+          origin/junteng_dev junteng calendar-sync
+          origin/junteng_dev junteng contact-manager
+          origin/junteng_dev junteng help-desk
+          origin/junteng_dev junteng order-processor
+          origin/junteng_dev junteng product-catalog
+          origin/junteng_dev junteng reminder-service
+          origin/junteng_dev junteng shipment-tracker
+          origin/junxian_dev junxian qr-generator
+          origin/junxian_dev junxian social-connector
+          origin/junxian_dev junxian translation-api
+          origin/lueyang-dev lueyang activity-logger
+          origin/lueyang-dev lueyang client-portal
+          origin/lueyang-dev lueyang crm-system
+          origin/lueyang-dev lueyang deal-manager
+          origin/lueyang-dev lueyang email-campaign
+          origin/lueyang-dev lueyang follow-up-reminder
+          origin/lueyang-dev lueyang sales-pipeline
+          origin/lueyang-dev lueyang territory-manager
           origin/lv lv analytics-dashboard
           origin/lv lv chat-bot
           origin/lv lv feedback-collector
@@ -78,28 +78,28 @@ jobs:
           origin/ruige ruige file-manager
           origin/ruige ruige log-analyzer
           origin/ruige ruige web-crawler
-          origin/wenshuo-dev wenshuo-dev cache-optimizer
-          origin/wenshuo-dev wenshuo-dev image-processor
-          origin/wenshuo-dev wenshuo-dev scheduler
-          origin/wenshuo-dev wenshuo-dev search-engine
-          origin/xiaochen_dev xiaochen_dev backup-utility
-          origin/xiaochen_dev xiaochen_dev deployment-tool
-          origin/xiaochen_dev xiaochen_dev error-tracker
-          origin/xiaochen_dev xiaochen_dev health-monitor
-          origin/xiaochen_dev xiaochen_dev monitoring-agent
-          origin/xiaochen_dev xiaochen_dev security-scanner
-          origin/xiaochen_dev xiaochen_dev status-checker
-          origin/yuxuan-dev yuxuan-dev asset-optimizer
-          origin/yuxuan-dev yuxuan-dev content-manager
-          origin/yuxuan-dev yuxuan-dev network-analyzer
-          origin/yuxuan-dev yuxuan-dev sync-service
-          origin/yuxuan-dev yuxuan-dev task-scheduler
-          origin/yuzhen-dev yuzhen-dev alert-system
-          origin/yuzhen-dev yuzhen-dev data-validator
-          origin/yuzhen-dev yuzhen-dev form-builder
-          origin/yuzhen-dev yuzhen-dev invoice-generator
-          origin/yuzhen-dev yuzhen-dev payment-processor
-          origin/yuzhen-dev yuzhen-dev permission-manager
+          origin/wenshuo-dev wenshuo cache-optimizer
+          origin/wenshuo-dev wenshuo image-processor
+          origin/wenshuo-dev wenshuo scheduler
+          origin/wenshuo-dev wenshuo search-engine
+          origin/xiaochen_dev xiaochen backup-utility
+          origin/xiaochen_dev xiaochen deployment-tool
+          origin/xiaochen_dev xiaochen error-tracker
+          origin/xiaochen_dev xiaochen health-monitor
+          origin/xiaochen_dev xiaochen monitoring-agent
+          origin/xiaochen_dev xiaochen security-scanner
+          origin/xiaochen_dev xiaochen status-checker
+          origin/yuxuan-dev yuxuan asset-optimizer
+          origin/yuxuan-dev yuxuan content-manager
+          origin/yuxuan-dev yuxuan network-analyzer
+          origin/yuxuan-dev yuxuan sync-service
+          origin/yuxuan-dev yuxuan task-scheduler
+          origin/yuzhen-dev yuzhen alert-system
+          origin/yuzhen-dev yuzhen data-validator
+          origin/yuzhen-dev yuzhen form-builder
+          origin/yuzhen-dev yuzhen invoice-generator
+          origin/yuzhen-dev yuzhen payment-processor
+          origin/yuzhen-dev yuzhen permission-manager
           origin/zhaochen zhaochen certificate-manager
           origin/zhaochen zhaochen load-balancer
           origin/zhaochen zhaochen storage-manager
